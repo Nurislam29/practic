@@ -1,0 +1,50 @@
+1. Создание БД:
+
+
+CREATE TABLE courses (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,          -- название курса
+    description TEXT NOT NULL,            -- описание курса
+    image VARCHAR(255) DEFAULT NULL,      -- путь к изображению
+    duration VARCHAR(50) DEFAULT NULL,    -- длительность или уроки
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+2. Наполнение базы:
+
+INSERT INTO courses (title, description, image, duration) VALUES
+('Современный HTML/CSS', 'Сетки, флексбоксы, семантика. Идеальная основа для любых проектов.', 'images/html_css.png', '48 часов'),
+('Динамика и взаимодействие', 'Подготовка к отправке данных на сервер, работа с формами и событиями.', 'images/js_ajax.png', '32 урока'),
+('Бэкенд-интеграция', 'Подключение базы данных, безопасность, миграция с HTML на динамику.', 'images/php_mysql.png', 'Готово к PDO'),
+('Адаптивный интерфейс', 'Мобильная версия, доступность, современные тренды веб-дизайна.', 'images/ui_ux.png', 'Mobile First');
+
+2.5 
+ALTER TABLE courses
+ADD COLUMN content TEXT DEFAULT NULL AFTER description;
+
+
+3. Таблица пользователей:
+
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+ALTER TABLE users
+ADD COLUMN password VARCHAR(255) NOT NULL AFTER email;
+
+
+Создаём таблицу user_courses
+CREATE TABLE user_courses (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    course_id INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uniq_user_course (user_id, course_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+

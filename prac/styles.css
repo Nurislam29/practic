@@ -1,0 +1,40 @@
+/* header */
+.page-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* выше всех элементов контента */
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    position: relative;
+    z-index: 1001; /* выше контента */
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    position: relative;
+    z-index: 1002;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #1e293b;
+    font-weight: 500;
+    display: inline-block; /* для правильной зоны клика */
+    position: relative;
+    z-index: 1003;
+    padding: 6px 0;
+}
+
+.main-nav a:hover {
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb;
+}
