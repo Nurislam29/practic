@@ -7,7 +7,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Подключение к базе
-$host = 'localhost';
+$host = 'base';
 $db   = 'demo';
 $user = 'root';
 $pass = '';
